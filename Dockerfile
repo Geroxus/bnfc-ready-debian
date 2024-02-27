@@ -24,8 +24,9 @@ ENV LC_ALL en_GB.UTF-8
 # get stack (for haskell)
 RUN curl -sSL https://get.haskellstack.org/ | sh
 
-# do something to the path so it just works(TM)
-RUN export PATH=${HOME}/.local/bin:${PATH}
-
 # get haskell things from stack
 RUN stack --resolver lts-18.28 --install-ghc install BNFC alex happy
+
+# do something to the path so it just works(TM)
+RUN echo "export PATH=${HOME}/.local/bin:${PATH}" >> ${HOME}/.bashrc
+# RUN source ${HOME}/.bashrc
